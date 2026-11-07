@@ -12,6 +12,7 @@
                 Due {{ chore.due_date|date:"d/m/Y" }}<br>
 
                 <a href="{% url 'edit_chore' chore.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'delete_chore' chore.id %}" class="btn btn-danger">Delete</a>
             
             </li>
         {% empty %}

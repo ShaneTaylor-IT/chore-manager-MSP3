@@ -124,3 +124,14 @@ def edit_chore(request, chore_id):
         form = ChoreForm(instance=chore)
 
     return render(request, "core/edit_chore.html", {'form': form, 'chore': chore})
+
+@login_required
+def delete_chore(request, chore_id):
+
+    chore = Chore.objects.get(id=chore_id)
+
+    if request.method == "POST":
+        chore.delete()
+        return redirect('chores')
+
+    return render(request, "core/delete_chore.html", {'chore': chore})
