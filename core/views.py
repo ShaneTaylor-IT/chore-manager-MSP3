@@ -109,3 +109,18 @@ def add_chore(request):
         'core/add_chore.html',
         {'form': form}
     )
+
+@login_required
+def edit_chore(request, chore_id):
+
+    chore = Chore.objects.get(id=chore_id)
+
+    if request.method == "POST":
+        form = ChoreForm(request.POST, instance=chore)
+        if form.is_valid():
+            form.save()
+            return redirect('chores')
+    else:
+        form = ChoreForm(instance=chore)
+
+    return render(request, "core/edit_chore.html", {'form': form, 'chore': chore})

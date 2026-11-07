@@ -10,5 +10,6 @@ urlpatterns = [
     path('members/', views.members, name='members'),
     path('chores/', views.chores, name='chores'),
     path('add_chore/', views.add_chore, name='add_chore'),
+    path('edit_chore/<int:chore_id>/', views.edit_chore, name='edit_chore'),
 ]
 

@@ -10,6 +10,8 @@
                 Category: {{ chore.category }}<br>
                 Points: {{ chore.points }}<br>
                 Due {{ chore.due_date|date:"d/m/Y" }}<br>
+
+                <a href="{% url 'edit_chore' chore.id %}" class="btn btn-warning">Edit</a>
             
             </li>
         {% empty %}
