@@ -5,6 +5,7 @@
     <ul>
         {% for chore in chores %}
             <li>
+                <!-- Will redesign this into a bootstrap card -->
                 <strong>{{ chore.title }}</strong>
                 Assigned to: {{ chore.assigned_member }}<br>
                 Category: {{ chore.category }}<br>
