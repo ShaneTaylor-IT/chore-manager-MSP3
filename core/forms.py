@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Chore
+from .models import Chore, Member
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()
@@ -24,3 +24,8 @@ class ChoreForm(forms.ModelForm):
         widgets = {
             'due_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class MemberForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ["user", "household", "role", "display_name", "avatar_colour"]

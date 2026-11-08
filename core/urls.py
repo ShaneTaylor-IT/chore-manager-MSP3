@@ -12,5 +12,8 @@ urlpatterns = [
     path('add_chore/', views.add_chore, name='add_chore'),
     path('edit_chore/<int:chore_id>/', views.edit_chore, name='edit_chore'),
     path('delete_chore/<int:chore_id>/', views.delete_chore, name='delete_chore'),
+    path('add_member/', views.add_member, name='add_member'),
+    path('edit_member/<int:member_id>/', views.edit_member, name='edit_member'),
+    path('delete_member/<int:member_id>/', views.delete_member, name='delete_member'),
 ]
 

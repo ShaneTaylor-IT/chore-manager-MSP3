@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Household, Member, Chore
-from .forms import ChoreForm
+from .forms import ChoreForm, MemberForm
 
 
 # Create your views here.
@@ -135,3 +135,41 @@ def delete_chore(request, chore_id):
         return redirect('chores')
 
     return render(request, "core/delete_chore.html", {'chore': chore})
+
+@login_required
+def add_member(request):
+    if request.method == 'POST':
+        form = MemberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("members")
+    else:
+        form = MemberForm()
+
+    return render(
+        request, "core/add_member.html", {'form': form}
+    )
+
+@login_required
+def edit_member(request, member_id):
+    member = Member.objects.get(id=member_id)
+
+    if request.method == "POST":
+        form = MemberForm(request.POST, instance=member)
+        if form.is_valid():
+            form.save()
+            return redirect('members')
+    else:
+        form = MemberForm(instance=member)
+
+    return render(request, "core/edit_member.html", {'form': form, 'member': member})
+
+@login_required
+def delete_member(request, member_id):
+    member = Member.objects.get(id=member_id)
+
+    if request.method == "POST":
+        member.delete()
+        return redirect('members')
+
+    return render(request, "core/delete_member.html", {'member': member})
