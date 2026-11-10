@@ -1,24 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container app-section">
     <h1>Chores</h1>
-    <ul>
+    <p> Here you can manage and track your household chores. </p>
+
+    <div class="row align-items-center mb-4">
+        <div class="col">
+            <h2>Household Chores</h2>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'add_chore' %}" class="app-btn">Add Chore</a>
+        </div>
+    </div>
+    <div class="row">
         {% for chore in chores %}
-            <li>
-                
-
-                <strong>{{ chore.title }}</strong>
-                Assigned to: {{ chore.assigned_member }}<br>
-                Category: {{ chore.category }}<br>
-                Points: {{ chore.points }}<br>
-                Due {{ chore.due_date|date:"d/m/Y" }}<br>
-
-                <a href="{% url 'edit_chore' chore.id %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'delete_chore' chore.id %}" class="btn btn-danger">Delete</a>
-            
-            </li>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="app-card card-body">
+                    <h3 class="card-title">{{ chore.title }}</h3>
+                    <p><strong>Description:</strong> {{ chore.description }}</p>
+                    <p><strong>Assigned To:</strong> {{ chore.assigned_member }}</p>
+                    <p><strong>Category:</strong> {{ chore.category }}</p>
+                    <p><strong>Points:</strong> {{ chore.points }}</p>
+                    <p><strong>Due Date:</strong> {{ chore.due_date|date:"d/m/Y" }}</p>
+                    <a href="{% url 'edit_chore' chore.id %}" class="app-btn">Edit</a>
+                    <a href="{% url 'delete_chore' chore.id %}" class="app-btn">Delete</a>
+                </div>
+            </div>
+        </div>
         {% empty %}
-            <li>No chores available.</li>
+        <p>No chores found.</p>
         {% endfor %}
-    </ul>
+    </div>
+</div>
+
 {% endblock %}

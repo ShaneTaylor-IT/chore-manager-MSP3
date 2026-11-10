@@ -16,7 +16,7 @@
     --secondary-background-color: #6b705c;
 }
 
-/* Adding font styles to the body and headings */
+
 body {
     font-family: var(--primary-font);
     background-color: var(--main-background-color);
