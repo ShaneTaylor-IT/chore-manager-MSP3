@@ -1,18 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<div class="container app-section">
     <h1>Members</h1>
-    <ul>
+    <p> Here you can manage your household members. </p>
+
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="app-card card-body">
+                <h3 class="card-title">{{ current_member.display_name }}</h3>
+                <p><strong>Role:</strong> {{ current_member.role }}</p>
+                <p><strong>Household:</strong> {{ current_member.household.name }}</p>
+                <a href="#" class="app-btn">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center mb-4">
+        <div class="col">
+            <h2>Household Members</h2>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'add_member' %}" class="app-btn">Add Member</a>
+        </div>
+        
+    </div>
+    <div class="row">
         {% for member in members %}
-            <li>
-                <strong>{{ member.display_name }}</strong><br>
-                Role: {{ member.role }}<br>
-                Household: {{ member.household.name }}<br>
-                <a href="{% url 'edit_member' member.id %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'delete_member' member.id %}" class="btn btn-danger">Delete</a>
-            </li>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="app-card card-body">
+                    <h3 class="card-title">{{ member.display_name }}</h3>
+                    <p><strong>Role:</strong> {{ member.role }}</p>
+                    <p><strong>Household:</strong> {{ member.household.name }}</p>
+                    <a href="{% url 'edit_member' member.id %}" class="app-btn">Edit</a>
+                    <a href="{% url 'delete_member' member.id %}" class="app-btn">Delete</a>
+                </div>
+            </div>
+        </div>
         {% empty %}
-            <li>No members found.</li>
+        <p>No members found.</p>
         {% endfor %}
-    </ul>
+    </div>
+</div>
+
+
 {% endblock %}

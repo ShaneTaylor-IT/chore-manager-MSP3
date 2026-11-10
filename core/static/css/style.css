@@ -1,0 +1,124 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* variables for colors and fonts */
+
+:root {
+    --primary-font: 'Roboto', sans-serif;
+    --secondary-font: 'Nunito', sans-serif;
+    --primary-color: #F7F3EA;
+    --secondary-color: #D8A84E;
+    --completed-color: #4CAF72;
+    --in-progress-color: #E9A23B;
+    --incomplete-color: #D65A5A; 
+    --rewards-color: #9B8AFB;
+    --main-background-color: #302A25;
+    --secondary-background-color: #6b705c;
+}
+
+/* Adding font styles to the body and headings */
+body {
+    font-family: var(--primary-font);
+    background-color: var(--main-background-color);
+    color: var(--primary-color);
+    padding-top: 70px; /* Adjust this value based on the height of your navbar */
+}
+
+/* Styling for the navbar */
+
+#logo {
+    height: 60px;
+    width: auto;
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+    color: var(--main-background-color);
+}
+
+.navbar .nav-link {
+    color: var(--main-background-color);
+}
+
+.navbar .nav-link.active {
+    color: var(--secondary-color);
+}
+
+/* Universal card style */
+.app-card {
+    background-color: var(--secondary-background-color);
+    color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 1.5rem;
+}
+
+/* Universal button style */
+.app-btn {
+    background-color: var(--secondary-color);
+    color: var(--main-background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 10px;
+}
+.app-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--main-background-color);
+}
+
+/* Universal section spacing */
+.app-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Universal section headings */
+.app-section h1,
+.app-section h2,
+.app-section h3,
+.app-section h4,
+.app-section h5,
+.app-section h6 {
+    color: var(--secondary-color);
+}
+
+/* Universal tile/list item */
+.app-tile {
+    background-color: var(--primary-color);
+    color: var(--main-background-color);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.app-tile:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-background-color);
+}
+
+/* Home page styling */
+.section-divider {
+    height: 2px;
+    background-color: var(--secondary-color);
+    opacity: 0.3;
+    margin: 2rem 0;
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--secondary-background-color);
+    color: var(--primary-color);
+    padding: 1rem 0;
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    #widgets .app-card {
+        height: 650px;
+    }
+
+    #widgets .app-card .app-btn {
+        margin-top: auto;
+    }
+}

@@ -73,9 +73,11 @@ def dashboard(request):
 
 @login_required
 def members(request):
-    members = Member.objects.all()
+    members = Member.objects.exclude(user=request.user)  # Exclude the current user from the list
+    current_member = Member.objects.get(user=request.user)
     context = {
         'members': members,
+        'current_member': current_member
     }
     return render(
         request,
