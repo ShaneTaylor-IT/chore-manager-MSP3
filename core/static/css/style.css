@@ -84,6 +84,10 @@ body {
 }
 
 /* Universal tile/list item */
+.app-list li {
+    list-style-type: none !important;
+}
+
 .app-tile {
     background-color: var(--primary-color);
     color: var(--main-background-color);

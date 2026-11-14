@@ -58,12 +58,35 @@ def dashboard(request):
     member_count = Member.objects.count()
     chore_count = Chore.objects.count()
 
+    weekly_summary = {
+    'Monday': {'assigned': 0, 'completed': 0},
+    'Tuesday': {'assigned': 0, 'completed': 0},
+    'Wednesday': {'assigned': 0, 'completed': 0},
+    'Thursday': {'assigned': 0, 'completed': 0},
+    'Friday': {'assigned': 0, 'completed': 0},
+    'Saturday': {'assigned': 0, 'completed': 0},
+    'Sunday': {'assigned': 0, 'completed': 0}
+}
+
+    for chore in Chore.objects.all():
+
+        day_of_week = chore.due_date.strftime('%A')
+
+        weekly_summary[day_of_week]['assigned'] += 1
+
+    if chore.completed:
+        weekly_summary[day_of_week]['completed'] += 1
+
+    current_member = Member.objects.filter(user=request.user).first()
+    
     context = {
         'household_count': household_count,
         'member_count': member_count,
         'chore_count': chore_count,
         'recent_chores': Chore.objects.all()[:5], # Show last 5 chores
         'recent_members': Member.objects.all()[:5],  # Show last 5 members
+        'weekly_summary': weekly_summary,
+        'current_member': current_member,
     }
     return render(
         request,
@@ -74,7 +97,10 @@ def dashboard(request):
 @login_required
 def members(request):
     members = Member.objects.exclude(user=request.user)  # Exclude the current user from the list
-    current_member = Member.objects.get(user=request.user)
+    current_member = Member.objects.filter(user=request.user).first()  # Get the current member object for the logged-in user
+    # After checking stack overflow, I found that the best way to get the current member object is to filter the Member model by the logged-in user and then use .first() to get the first result. 
+    # This will return None if no member is found for the logged-in user, which is a safe way to handle this situation. Over the .get() method, which would raise an exception if no member is found.
+    # I chose to use this method after creating a new superuser and while logged in as that super user, I tried to go to the members page with the .get() mothod and got an error message.
     context = {
         'members': members,
         'current_member': current_member

@@ -16,17 +16,17 @@
     <div class="row">
         {% for chore in chores %}
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100">
-                <div class="app-card card-body">
-                    <h3 class="card-title">{{ chore.title }}</h3>
-                    <p><strong>Description:</strong> {{ chore.description }}</p>
-                    <p><strong>Assigned To:</strong> {{ chore.assigned_member }}</p>
-                    <p><strong>Category:</strong> {{ chore.category }}</p>
-                    <p><strong>Points:</strong> {{ chore.points }}</p>
-                    <p><strong>Due Date:</strong> {{ chore.due_date|date:"d/m/Y" }}</p>
-                    <a href="{% url 'edit_chore' chore.id %}" class="app-btn">Edit</a>
-                    <a href="{% url 'delete_chore' chore.id %}" class="app-btn">Delete</a>
-                </div>
+            <div class="app-card h-100">
+
+                <h3 class="card-title">{{ chore.title }}</h3>
+                <p><strong>Description:</strong> {{ chore.description }}</p>
+                <p><strong>Assigned To:</strong> {{ chore.assigned_member }}</p>
+                <p><strong>Category:</strong> {{ chore.category }}</p>
+                <p><strong>Points:</strong> {{ chore.points }}</p>
+                <p><strong>Due Date:</strong> {{ chore.due_date|date:"d/m/Y" }}</p>
+                <a href="{% url 'edit_chore' chore.id %}" class="app-btn">Edit</a>
+                <a href="{% url 'delete_chore' chore.id %}" class="app-btn">Delete</a>
+
             </div>
         </div>
         {% empty %}

@@ -1,60 +1,135 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="app-section">
     <h1>Dashboard</h1>
     <p>Welcome {{user.username}}!</p>
-    <p>You successfully logged in.</p>
-
+    <p>Here is an overview</p>
+</div>
+<div class="app-section">
     <h2>Dashboard Statistics</h2>
+</div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Households</h5>
-                    <p class="card-text">{{ household_count }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Members</h5>
-                    <p class="card-text">{{ member_count }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Chores</h5>
-                    <p class="card-text">{{ chore_count }}</p>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="app-card text-center h-100">
+
+            <h5 class="card-title">Total Households</h5>
+            <p class="display-4 fw-bold card-text">{{ household_count }}</p>
+
         </div>
     </div>
-    
+    <div class="col-md-4">
+        <div class="app-card text-center h-100">
 
+            <h5 class="card-title">Total Members</h5>
+            <p class="display-4 fw-bold card-text">{{ member_count }}</p>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="app-card text-center h-100">
+
+            <h5 class="card-title">Total Chores</h5>
+            <p class="display-4 fw-bold card-text">{{ chore_count }}</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="app-section">
+    <h2>Weekly Summary</h2>
+</div>
+
+<div class="row">
+    {% for day, stats in weekly_summary.items %}
+        <div class="col-md-3 mb-4">
+            <div class="app-card text-center h-100">
+
+                <h3 class="card-title">{{ day }}</h3>
+                <p>{{ stats.assigned }}/{{ stats.completed }}</p>
+                <small>Assigned / Completed</small>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="app-section">
     <h2>Recent Chores</h2>
-    <ul>
-        {% for chore in recent_chores %}
-            <li>
-                <strong>{{ chore.title }}</strong><br>
-                Assigned to: {{ chore.assigned_member }}<br>
-                Category: {{ chore.category }}<br>
-                Points: {{ chore.points }}<br>
-            </li>
-            {% empty %}
-            <li>No recent chores found.</li>
-        {% endfor %}
-    </ul>
+</div>
 
+<div class="row">
+    {% for chore in recent_chores %}
+        <div class="col-md-6 mb-4">
+            <div class="app-card h-100">
+
+                <h3 class="card-title">{{ chore.title }}</h3>
+                <p><strong>Description:</strong> {{ chore.description }}</p>
+                <p><strong>Assigned To:</strong> {{ chore.assigned_member }}</p>
+                <p><strong>Category:</strong> {{ chore.category }}</p>
+                <p><strong>Points:</strong> {{ chore.points }}</p>
+                <p><strong>Due Date:</strong> {{ chore.due_date|date:"d/m/Y" }}</p>
+                
+            </div>
+        </div>
+    
+    {% empty %}
+        <p>No recent chores found.</p>
+    {% endfor %}
+</div>
+
+<div class="app-section">
     <h2>Recent Members</h2>
-    <ul>
-        {% for member in recent_members %}
-            <li>{{ member.display_name }}</li>
-        {% empty %}
-            <li>No recent members found.</li>
-        {% endfor %}
-    </ul>
+</div>
+
+<div class="row">
+    {% for member in recent_members %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="app-card h-100">
+
+                <h3 class="card-title">{{ member.display_name }}</h3>
+                <p><strong>Role:</strong> {{ member.role }}</p>
+                <p><strong>Household:</strong> {{ member.household.name }}</p>
+                <p><strong>Points:</strong> {{ member.points }}</p>
+            </div>
+        </div>
+    
+    {% empty %}
+        <p>No recent members found.</p>
+    {% endfor %}
+</div>
+
+<div class="app-section">
+    <h2>Weather and Rewards</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="app-card h-100">
+
+            <h3 class="card-title">Weather</h3>
+            <ul class="list-group list-group-flush app-list">
+                <li class="app-tile"><p><strong>Temperature:</strong> Loading...</p></li>
+                <li class="app-tile"><p><strong>Feels like:</strong> Loading...</p></li>
+                <li class="app-tile"><p><strong>Condition:</strong> Loading...</p></li>
+                <li class="app-tile"><p><strong>Ideal for outdoor chores:</strong> Checking...</p></li>
+            </ul>
+            <a href="#" class="app-btn btn">See weekly forecast</a>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="app-card h-100">
+
+            <h3 class="card-title">Rewards</h3>
+            <ul class="list-group list-group-flush app-list">
+                <li class="app-tile"><p><strong>Member:</strong> {{ current_member.display_name }}</p></li>
+                <li class="app-tile"><p><strong>Total Points:</strong> {{ current_member.points }}</p></li>
+                <li class="app-tile"><p><strong>Available Rewards:</strong> MSP4 Feature</p></li>
+                <li class="app-tile"><p><strong>Last Reward Claimed:</strong> N/A</p></li>
+            </ul>
+            <a href="#" class="app-btn btn">View Rewards</a>
+        </div>
+    </div>
+
 {% endblock %}
