@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from .forms import RegistrationForm
 from django.shortcuts import redirect
@@ -6,6 +7,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Household, Member, Chore
 from .forms import ChoreForm, MemberForm
+
 
 
 # Create your views here.
@@ -78,7 +80,31 @@ def dashboard(request):
         weekly_summary[day_of_week]['completed'] += 1
 
     current_member = Member.objects.filter(user=request.user).first()
-    
+
+    api_key = "6a6a8b67e821d86b020f0bf50abf4365"
+
+    weather_url = (f"https://api.openweathermap.org/data/2.5/weather" f"?q=Oldham&appid={api_key}&units=metric")
+
+    weather_response = requests.get(weather_url)
+
+    weather_data = weather_response.json()    
+
+    temperature = weather_data["main"]["temp"]
+
+    feels_like = weather_data["main"]["feels_like"]
+
+    condition = weather_data["weather"][0]["main"]
+
+    if condition in ['clear', 'clouds']:
+        outdoor_suitability = 'Yes'
+    else:
+        outdoor_suitability = 'No'
+
+    print(weather_data)
+    print("Temperature:", temperature)
+    print("Feels Like:", feels_like)
+    print("Condition:", condition)
+
     context = {
         'household_count': household_count,
         'member_count': member_count,
@@ -87,6 +113,11 @@ def dashboard(request):
         'recent_members': Member.objects.all()[:5],  # Show last 5 members
         'weekly_summary': weekly_summary,
         'current_member': current_member,
+
+        'temperature': temperature,
+        'feels_like' : feels_like,
+        'condition' : condition,
+        'outdoor_suitability' : outdoor_suitability,
     }
     return render(
         request,
