@@ -1,4 +1,5 @@
 import requests
+from datetime import date
 from django.shortcuts import render
 from .forms import RegistrationForm
 from django.shortcuts import redirect
@@ -250,8 +251,17 @@ def schedule(request):
         day = chore.due_date.strftime('%A')
         weekly_schedule[day].append(chore)
 
+    total_chores = Chore.objects.count()
+    completed_chores = Chore.objects.filter(completed=True).count()
+    pending_chores = Chore.objects.filter(completed=False).count()
+    overdue_chores = Chore.objects.filter(completed=False, due_date__lt=date.today()).count()
+
     context = {
         'weekly_schedule': weekly_schedule,
+        'total_chores': total_chores,
+        'completed_chores': completed_chores,
+        'pending_chores': pending_chores,
+        'overdue_chores': overdue_chores,
     }
 
     return render(request,'core/schedule.html',context)

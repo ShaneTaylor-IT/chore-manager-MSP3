@@ -30,4 +30,29 @@
 
 {% endfor %}
 
+<div class="app-section">
+    <h2>Weekly summary</h2>
+
+    <div class="app-card">
+        <div class="row text-center">
+            <div class="col">
+                <h3>{{ total_chores }}</h3>
+                <p>Total</p>
+            </div>
+            <div class="col">
+                <h3>{{ completed_chore }}</h3>
+                <p>Completd</p>
+            </div>
+            <div class="col">
+                <h3>{{ pending_chore }}</h3>
+                <p>Pending</p>
+            </div>
+            <div class="col">
+                <h3>{{ overdue_chore }}</h3>
+                <p>Overdue</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
