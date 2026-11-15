@@ -232,3 +232,26 @@ def delete_member(request, member_id):
         return redirect('members')
 
     return render(request, "core/delete_member.html", {'member': member})
+
+@login_required
+def schedule(request):
+
+    weekly_schedule = {
+        'Monday' : [],
+        'Tuesday' : [],
+        'Wednesday' : [],
+        'Thursday' : [],
+        'Friday' : [],
+        'Saturday' : [],
+        'Sunday' : [],
+    }
+
+    for chore in Chore.objects.all().order_by('due_date'):
+        day = chore.due_date.strftime('%A')
+        weekly_schedule[day].append(chore)
+
+    context = {
+        'weekly_schedule': weekly_schedule,
+    }
+
+    return render(request,'core/schedule.html',context)
