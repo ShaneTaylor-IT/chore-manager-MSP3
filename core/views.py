@@ -237,6 +237,9 @@ def delete_member(request, member_id):
 @login_required
 def schedule(request):
 
+    members = Member.objects.all()
+    selected_member = request.GET.get('member')
+
     weekly_schedule = {
         'Monday' : [],
         'Tuesday' : [],
@@ -247,7 +250,12 @@ def schedule(request):
         'Sunday' : [],
     }
 
-    for chore in Chore.objects.all().order_by('due_date'):
+    chores = Chore.objects.all().order_by('due_date')
+
+    if selected_member:
+        chores = chores.filter(assigned_member_id=selected_member)
+
+    for chore in chores:
         day = chore.due_date.strftime('%A')
         weekly_schedule[day].append(chore)
 
@@ -262,6 +270,7 @@ def schedule(request):
         'completed_chores': completed_chores,
         'pending_chores': pending_chores,
         'overdue_chores': overdue_chores,
+        'members': members,
     }
 
     return render(request,'core/schedule.html',context)
