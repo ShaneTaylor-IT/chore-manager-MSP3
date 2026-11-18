@@ -274,3 +274,14 @@ def schedule(request):
     }
 
     return render(request,'core/schedule.html',context)
+
+
+@login_required
+def complete_chore(request, chore_id):
+
+    chore = Chore.objects.get (id=chore_id)
+
+    chore.completed = True
+    chore.save()
+
+    return redirect('schedule')

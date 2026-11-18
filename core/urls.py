@@ -16,5 +16,6 @@ urlpatterns = [
     path('edit_member/<int:member_id>/', views.edit_member, name='edit_member'),
     path('delete_member/<int:member_id>/', views.delete_member, name='delete_member'),
     path('schedule/', views.schedule, name='schedule'),
+    path('completed_chore/<int:chore_id>', views.complete_chore, name='complete_chore'),
 ]
 

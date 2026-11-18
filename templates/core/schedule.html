@@ -13,7 +13,7 @@
             name="member"
             id="member"
             class="form-select"
-            onchange="this.form.submit"
+            onchange="this.form.submit()"
             >
 
             <option value="">
@@ -44,6 +44,12 @@
                 <p><strong>{{ chore.title }}</strong></p>
                 <p>Assigned: {{ chore.assigned_member }}</p>
                 <p>Due: {{ chore.due_date }}</p>
+                {% if chore.completed %}
+                    <p><strong>Status: </strong>Completed</p>
+                {% else %}
+                    <p><strong>Status: </strong>Pending</p>
+                    <a href="{% url 'complete_chore' chore.id %}" class="app-btn">Complete</a>
+                {% endif %}
             </div>
 
         {% empty %}
