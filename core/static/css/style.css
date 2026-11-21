@@ -84,7 +84,7 @@ body {
 }
 
 /* Universal tile/list item */
-.app-list li {
+.app-list ul li {
     list-style-type: none !important;
 }
 

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="app-section">
+    <h1>Profile</h1>
+    <p>Manage your account and household information.</p>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 mb-4">
+
+        <div class="app-card h-100">
+
+            <h3>Profile information</h3>
+
+            <ul class="list-group list-flush app-list">
+                <li class="app-tile">
+                    <strong>Username: </strong>{{ user.username }}
+                </li>
+                <li class="app-tile">
+                    <strong>Email: </strong>{{ user.email }}
+                </li>
+                <li class="app-tile">
+                    <stong>Date Jioned: </stong>{{ user.date_joined|date:"d/m/Y" }}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+
+        <div class="app-card h-100">
+
+            <h3>Household information</h3>
+
+            <ul class="list-group list-flush app-list">
+                <li class="app-tile">
+                    <strong>Household </strong>{{ household.name }}
+                </li>
+                <li class="app-tile">
+                    <strong>Members: </strong>{{ member_count }}
+                </li>
+                <li class="app-tile">
+                    <stong>Total Chores: </stong>{{ chore_count }}
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="app-card">
+            <h3>Upcoming features</h3>
+
+            <ul class="list-group list-group-flush app-list">
+                <li class="app-tile">Avatar Selection</li>
+                <li class="app-tile">Reward History</li>
+                <li class="app-tile">Achievment badges</li>
+                <li class="app-tile">Nitifications</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

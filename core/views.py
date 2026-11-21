@@ -285,3 +285,19 @@ def complete_chore(request, chore_id):
     chore.save()
 
     return redirect('schedule')
+
+
+@login_required
+def profile(request):
+    current_member = Member.objects.filter(user=request.user).first()
+    household = current_member.household
+    member_count = Member.objects.count()
+    chore_count = Chore.objects.count()
+
+    context = {
+        'household' : household,
+        'member_count' : member_count,
+        'chore_count' : chore_count,
+    }
+
+    return render(request, 'core/profile.html', context)
