@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="app-section">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="app-card text-center">
+
+                <h1>403 - Access denied</h1>
+
+                <p>You do not have permissions to access this page.</p>
+                <p>Some areas for Chore Manager are restricted to household Admin.</p>
+                <a href="{% url 'dashboard' %}" class="app-btn">Return to dashboard</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -338,3 +338,6 @@ def profile(request):
 
 def custom_404(request, exception):
     return render(request, 'core/404.html', status=404)
+
+def custom_403(request):
+    return render(request, 'core/403.html', status=403)

@@ -19,5 +19,6 @@ urlpatterns = [
     path('completed_chore/<int:chore_id>', views.complete_chore, name='complete_chore'),
     path('profile/', views.profile, name='profile'),
     path('test404/',views.custom_404,{'exception': None}, name='test404'),
+    path('test403/',views.custom_403,name='test403'),
 ]
 
