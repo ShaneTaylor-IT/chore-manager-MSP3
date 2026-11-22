@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="app-section">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="app-card text-center">
+
+                <h1>404 - page not found</h1>
+
+                <p>The page you are looking for does not exist, has been moved, or is not currently available.</p>
+
+                <p>Some features may be planned for a future MSP4 release.</p>
+
+                <a href="{% url 'dashboard' %}" class="app-btn">Return to dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -18,5 +18,6 @@ urlpatterns = [
     path('schedule/', views.schedule, name='schedule'),
     path('completed_chore/<int:chore_id>', views.complete_chore, name='complete_chore'),
     path('profile/', views.profile, name='profile'),
+    path('test404/',views.custom_404,{'exception': None}, name='test404'),
 ]
 
