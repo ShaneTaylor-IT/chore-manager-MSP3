@@ -22,9 +22,12 @@
         <div class="col">
             <h2>Household Members</h2>
         </div>
+
+        {% if current_member.role == 'admin' %}
         <div class="col-auto">
             <a href="{% url 'add_member' %}" class="app-btn">Add Member</a>
         </div>
+        {% endif %}
 
     </div>
     <div class="row">
@@ -36,8 +39,10 @@
                 <p><strong>Role:</strong> {{ member.role }}</p>
                 <p><strong>Household:</strong> {{ member.household.name }}</p>
                 <p><strong>Points:</strong> {{ member.points }}</p>
+                {% if current_member.role == 'admin' %}
                 <a href="{% url 'edit_member' member.id %}" class="app-btn">Edit</a>
                 <a href="{% url 'delete_member' member.id %}" class="app-btn">Delete</a>
+                {% endif %}
 
             </div>
         </div>

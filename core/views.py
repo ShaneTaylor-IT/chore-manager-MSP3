@@ -157,6 +157,12 @@ def chores(request):
 
 @login_required
 def add_chore(request):
+
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+    
     if request.method == 'POST':
         form = ChoreForm(request.POST)
         if form.is_valid():
@@ -173,6 +179,11 @@ def add_chore(request):
 @login_required
 def edit_chore(request, chore_id):
 
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+
     chore = Chore.objects.get(id=chore_id)
 
     if request.method == "POST":
@@ -188,6 +199,11 @@ def edit_chore(request, chore_id):
 @login_required
 def delete_chore(request, chore_id):
 
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+
     chore = Chore.objects.get(id=chore_id)
 
     if request.method == "POST":
@@ -198,6 +214,12 @@ def delete_chore(request, chore_id):
 
 @login_required
 def add_member(request):
+
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = MemberForm(request.POST)
         if form.is_valid():
@@ -212,6 +234,12 @@ def add_member(request):
 
 @login_required
 def edit_member(request, member_id):
+
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+
     member = Member.objects.get(id=member_id)
 
     if request.method == "POST":
@@ -226,6 +254,12 @@ def edit_member(request, member_id):
 
 @login_required
 def delete_member(request, member_id):
+
+    current_member = Member.objects.filter(user=request.user).first()
+
+    if not current_member or current_member.role != 'admin':
+        return redirect('dashboard')
+
     member = Member.objects.get(id=member_id)
 
     if request.method == "POST":

@@ -9,9 +9,11 @@
         <div class="col">
             <h2>Household Chores</h2>
         </div>
+        {% if current_member.role == 'admin' %}
         <div class="col-auto">
             <a href="{% url 'add_chore' %}" class="app-btn">Add Chore</a>
         </div>
+        {% endif %}
     </div>
     <div class="row">
         {% for chore in chores %}
@@ -24,8 +26,10 @@
                 <p><strong>Category:</strong> {{ chore.category }}</p>
                 <p><strong>Points:</strong> {{ chore.points }}</p>
                 <p><strong>Due Date:</strong> {{ chore.due_date|date:"d/m/Y" }}</p>
+                {% if current_member.role == 'admin' %}
                 <a href="{% url 'edit_chore' chore.id %}" class="app-btn">Edit</a>
                 <a href="{% url 'delete_chore' chore.id %}" class="app-btn">Delete</a>
+                {% endif %}
 
             </div>
         </div>
